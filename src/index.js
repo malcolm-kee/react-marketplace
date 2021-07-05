@@ -1,2 +1,5 @@
-const rootElement = document.getElementById("root");
-rootElement.innerHTML = "Hello world";
+import { showNow } from "./show-now";
+
+showNow();
+
+setInterval(showNow, 1000);
