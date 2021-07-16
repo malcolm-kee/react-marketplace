@@ -1,12 +1,12 @@
 import * as React from "react";
 
-const EditButton = () => {
+const EditButton = (props) => {
   return (
     <button
       type="button"
       className="js-edit-btn p-1 rounded-full hover:bg-gray-50 focus:outline-none focus:bg-gray-50 focus:ring focus:ring-pink-500 focus:ring-opacity-30 transition duration-150 ease-in-out"
       title="Edit"
-      onClick={() => alert("Edit btn clicked, populate the form!")}
+      onClick={props.onClick}
     >
       <svg
         className="h-5 w-5 text-gray-400"
@@ -20,13 +20,13 @@ const EditButton = () => {
   );
 };
 
-const DeleteButton = () => {
+const DeleteButton = (props) => {
   return (
     <button
       type="button"
       className="js-delete-btn p-1 rounded-full hover:bg-gray-50 focus:outline-none focus:bg-gray-50 focus:ring focus:ring-pink-500 focus:ring-opacity-30 transition duration-150 ease-in-out"
       title="Delete"
-      onClick={() => alert("Delete btn clicked, delete the item!")}
+      onClick={props.onClick}
     >
       <svg
         className="w-5 h-5 text-gray-400"
@@ -62,33 +62,38 @@ const WorkingBagIcon = () => {
   );
 };
 
-const CareerItemTitle = () => {
+const CareerItemTitle = (props) => {
   return (
     <div className="text-sm leading-5 font-medium text-pink-600 truncate">
-      Memer
-      <span className="ml-1 font-normal text-gray-500">in UI / UX Design</span>
+      {props.title}
+      <span className="ml-1 font-normal text-gray-500">
+        in {props.department}
+      </span>
     </div>
   );
 };
 
-export function CareerItem() {
+export function CareerItem(props) {
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
       <div className="px-4 py-4 flex items-center sm:px-6">
         <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
           <div>
-            <CareerItemTitle />
+            <CareerItemTitle
+              title={props.title}
+              department={props.department}
+            />
             <div className="mt-2 flex">
               <div className="flex items-center gap-2 text-sm leading-5 text-gray-500">
                 <WorkingBagIcon />
-                <span>Level: Experienced </span>
+                <span>Level: {props.level} </span>
               </div>
             </div>
           </div>
         </div>
         <div className="ml-5 flex-shrink-0 inline-flex items-center justify-center gap-2">
-          <EditButton />
-          <DeleteButton />
+          <EditButton onClick={props.onEdit} />
+          <DeleteButton onClick={props.onDelete} />
         </div>
       </div>
     </div>
