@@ -1,6 +1,8 @@
 import * as React from "react";
 
 export const Accordion = (props) => {
+  const [showContent, setShowContent] = React.useState(false);
+
   return (
     <div className="pt-6">
       <div className="text-lg">
@@ -8,11 +10,14 @@ export const Accordion = (props) => {
           type="button"
           className="flex w-full items-center justify-between text-gray-400 focus:outline-none focus:ring focus:ring-offset-4"
           aria-expanded="false"
+          onClick={() => setShowContent(!showContent)}
         >
           <span className="font-medium text-gray-900">{props.title}</span>
           <span className="ml-6 h-7 flex items-center">
             <svg
-              className="rotate-0 h-6 w-6 transform"
+              className={`h-6 w-6 transform ${
+                showContent ? "rotate-180" : "rotate-0"
+              }`}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -29,7 +34,7 @@ export const Accordion = (props) => {
           </span>
         </button>
       </div>
-      <div className="mt-2 pr-12">{props.children}</div>
+      {showContent && <div className="mt-2 pr-12">{props.children}</div>}
     </div>
   );
 };
