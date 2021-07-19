@@ -88,7 +88,9 @@ export function CareerItem(props) {
           <div className="mt-2 flex">
             <div className="flex items-center gap-2 text-sm leading-5 text-gray-500">
               <WorkingBagIcon />
-              <span>Level: {props.level} </span>
+              <span>
+                Level: <span className="capitalize">{props.level}</span>{" "}
+              </span>
               {props.studentFriendly && (
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                   Student-friendly
