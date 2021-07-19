@@ -73,34 +73,35 @@ const CareerItemTitle = (props) => {
   );
 };
 
+const Card = (props) => (
+  <div className="bg-white shadow overflow-hidden sm:rounded-md">
+    <div className="px-4 py-4 flex items-center sm:px-6">{props.children}</div>
+  </div>
+);
+
 export function CareerItem(props) {
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-md">
-      <div className="px-4 py-4 flex items-center sm:px-6">
-        <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-          <div>
-            <CareerItemTitle
-              title={props.title}
-              department={props.department}
-            />
-            <div className="mt-2 flex">
-              <div className="flex items-center gap-2 text-sm leading-5 text-gray-500">
-                <WorkingBagIcon />
-                <span>Level: {props.level} </span>
-                {props.studentFriendly && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    Student-friendly
-                  </span>
-                )}
-              </div>
+    <Card>
+      <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+        <div>
+          <CareerItemTitle title={props.title} department={props.department} />
+          <div className="mt-2 flex">
+            <div className="flex items-center gap-2 text-sm leading-5 text-gray-500">
+              <WorkingBagIcon />
+              <span>Level: {props.level} </span>
+              {props.studentFriendly && (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  Student-friendly
+                </span>
+              )}
             </div>
           </div>
         </div>
-        <div className="ml-5 flex-shrink-0 inline-flex items-center justify-center gap-2">
-          <EditButton onClick={props.onEdit} />
-          <DeleteButton onClick={props.onDelete} />
-        </div>
       </div>
-    </div>
+      <div className="ml-5 flex-shrink-0 inline-flex items-center justify-center gap-2">
+        <EditButton onClick={props.onEdit} />
+        <DeleteButton onClick={props.onDelete} />
+      </div>
+    </Card>
   );
 }
