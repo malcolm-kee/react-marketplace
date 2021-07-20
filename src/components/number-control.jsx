@@ -2,6 +2,7 @@ import * as React from "react";
 
 export const NumberControl = () => {
   const [value, setValue] = React.useState(0);
+  const [error, setError] = React.useState("");
 
   return (
     <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -9,7 +10,14 @@ export const NumberControl = () => {
         <button
           type="button"
           className="absolute left-0 inset-y-0 px-1.5 text-gray-400"
-          onClick={() => setValue(value - 1)}
+          onClick={() => {
+            if (value > 1) {
+              setError("");
+              setValue(value - 1);
+            } else {
+              setError("Headcount must be at least 1.");
+            }
+          }}
         >
           <svg
             className="w-6 h-6"
@@ -36,7 +44,10 @@ export const NumberControl = () => {
         <button
           type="button"
           className="absolute right-0 inset-y-0 px-1.5 text-gray-400"
-          onClick={() => setValue(value + 1)}
+          onClick={() => {
+            setError("");
+            setValue(value + 1);
+          }}
         >
           <svg
             className="w-6 h-6"
@@ -54,6 +65,7 @@ export const NumberControl = () => {
           </svg>
         </button>
       </div>
+      {error && <div className="text-red-500 text-xs pt-1">{error}</div>}
     </div>
   );
 };
