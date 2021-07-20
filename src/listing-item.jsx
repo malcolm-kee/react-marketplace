@@ -40,9 +40,9 @@ const DeleteButton = () => (
   </button>
 );
 
-const OnlyOneBadge = () => (
+const Badge = (props) => (
   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-    Only One
+    {props.children}
   </span>
 );
 
@@ -66,7 +66,7 @@ export const ListingItem = (props) => {
               RM <span className="text-2xl font-bold">{props.price}</span>
             </div>
             {props.onlyOne ? (
-              <OnlyOneBadge />
+              <Badge>Only One</Badge>
             ) : (
               <div className="text-sm text-gray-500">
                 {props.availableStock} piece available
