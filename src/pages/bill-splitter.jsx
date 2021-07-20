@@ -1,7 +1,8 @@
 import * as React from "react";
 
 const NumberControl = (props) => {
-  const [value, setValue] = React.useState(1);
+  const value = props.value;
+  const setValue = props.onChange;
 
   return (
     <div className="relative">
@@ -77,6 +78,11 @@ const Label = (props) => (
 );
 
 export const BillSplitter = () => {
+  const [billTotal, setBillTotal] = React.useState("");
+  const [pax, setPax] = React.useState(1);
+
+  const [result, setResult] = React.useState("0.00");
+
   return (
     <div className="max-w-4xl mx-auto px-3 py-12 space-y-6">
       <div>
@@ -90,15 +96,22 @@ export const BillSplitter = () => {
               type="number"
               id="billTotal"
               className="block w-full rounded-md focus:ring-pink-500 focus:border-pink-500 border-gray-300"
+              value={billTotal}
+              onChange={(ev) => setBillTotal(ev.target.value)}
               required
             />
           </div>
           <div>
             <Label htmlFor="pax">Pax</Label>
-            <NumberControl id="pax" />
+            <NumberControl id="pax" value={pax} onChange={setPax} />
           </div>
           <div className="text-right">
             <button
+              onClick={() => {
+                if (billTotal) {
+                  setResult((Number(billTotal) / pax).toFixed(2));
+                }
+              }}
               type="button"
               className="w-full px-3 py-1 bg-pink-500 text-white rounded shadow"
             >
@@ -111,7 +124,7 @@ export const BillSplitter = () => {
           <div>
             <output>
               <span id="result" className="text-6xl tabular-nums font-mono">
-                0.00
+                {result}
               </span>
             </output>
           </div>
