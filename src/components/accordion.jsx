@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const Accordion = (props) => {
-  const [showContent, setShowContent] = React.useState(false);
+  const showContent = props.showContent;
 
   return (
     <div className="pt-6">
@@ -10,7 +10,7 @@ export const Accordion = (props) => {
           type="button"
           className="flex w-full items-center justify-between text-gray-400 focus:outline-none focus:ring focus:ring-offset-4"
           aria-expanded="false"
-          onClick={() => setShowContent(!showContent)}
+          onClick={props.onToggleShow}
         >
           <span className="font-medium text-gray-900">{props.title}</span>
           <span className="ml-6 h-7 flex items-center">

@@ -1,5 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { NumberControl } from "./components/number-control";
+import { Faq } from "./pages/faq";
 
-ReactDOM.render(<NumberControl />, document.getElementById("root"));
+ReactDOM.render(<Faq />, document.getElementById("root"));
