@@ -1,5 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Faq } from "./pages/faq";
+import { BillSplitter } from "./pages/bill-splitter";
 
-ReactDOM.render(<Faq />, document.getElementById("root"));
+ReactDOM.render(<BillSplitter />, document.getElementById("root"));
