@@ -40,6 +40,12 @@ const DeleteButton = () => (
   </button>
 );
 
+const OnlyOneBadge = () => (
+  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+    Only One
+  </span>
+);
+
 export const ListingItem = (props) => {
   return (
     <div className="relative flex flex-col">
@@ -59,9 +65,13 @@ export const ListingItem = (props) => {
             <div>
               RM <span className="text-2xl font-bold">{props.price}</span>
             </div>
-            <div className="text-sm text-gray-500">
-              {props.availableStock} piece available
-            </div>
+            {props.onlyOne ? (
+              <OnlyOneBadge />
+            ) : (
+              <div className="text-sm text-gray-500">
+                {props.availableStock} piece available
+              </div>
+            )}
           </div>
           <p className="block text-sm font-medium text-gray-900 truncate pointer-events-none">
             {props.title}
