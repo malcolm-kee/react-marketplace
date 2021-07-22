@@ -88,6 +88,12 @@ export const BillSplitter = () => {
       ? (billTotal / pax).toFixed(2)
       : "";
 
+  React.useEffect(() => {
+    if (billTotal) {
+      document.title = `Bill total is ${billTotal}`;
+    }
+  });
+
   return (
     <div className="max-w-4xl mx-auto px-3 py-12 space-y-6">
       <div>
