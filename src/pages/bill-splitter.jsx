@@ -90,7 +90,13 @@ export const BillSplitter = () => {
 
   React.useEffect(() => {
     if (billTotal) {
+      const currentTitle = document.title;
+
       document.title = `Bill total is ${billTotal}`;
+
+      return () => {
+        document.title = currentTitle;
+      };
     }
   });
 
