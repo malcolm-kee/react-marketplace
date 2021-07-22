@@ -98,7 +98,7 @@ export const BillSplitter = () => {
         document.title = currentTitle;
       };
     }
-  });
+  }, [billTotal]);
 
   return (
     <div className="max-w-4xl mx-auto px-3 py-12 space-y-6">
