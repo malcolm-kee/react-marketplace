@@ -18,30 +18,34 @@ export const Careers = () => {
           <h1 className="text-6xl mb-4 font-extrabold">Careers</h1>
         </div>
       </div>
-      <div className="space-y-3">
-        {jobs &&
-          jobs.map((job) => (
-            <CareerItem
-              title={job.title}
-              department={job.department}
-              level={job.level}
-              studentFriendly={job.level === "internship"}
-              key={job._id}
-            />
-          ))}
-      </div>
-      {!jobs && (
-        <div className="text-center">
-          <Button
-            onClick={() => {
-              setClicked(true);
-              getJobs().then((result) => setJobs(result));
-            }}
-          >
-            {clicked ? "Loading..." : "Load"}
-          </Button>
+      <div>
+        <div>
+          <div className="space-y-3">
+            {jobs &&
+              jobs.map((job) => (
+                <CareerItem
+                  title={job.title}
+                  department={job.department}
+                  level={job.level}
+                  studentFriendly={job.level === "internship"}
+                  key={job._id}
+                />
+              ))}
+          </div>
+          {!jobs && (
+            <div className="text-center">
+              <Button
+                onClick={() => {
+                  setClicked(true);
+                  getJobs().then((result) => setJobs(result));
+                }}
+              >
+                {clicked ? "Loading..." : "Load"}
+              </Button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
