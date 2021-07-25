@@ -54,17 +54,39 @@ export const Careers = () => {
   );
 };
 
+const addJob = (job) =>
+  fetch("https://ecomm-service.herokuapp.com/job", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(job),
+    method: "POST",
+  }).then((res) => res.json());
+
 const CareerForm = () => {
   const [jobTitle, setJobTitle] = React.useState("");
   const [level, setLevel] = React.useState("internship");
   const [department, setDepartment] = React.useState("");
   const [summary, setSummary] = React.useState("");
   const [headcount, setHeadcount] = React.useState(1);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   return (
     <form
       onSubmit={(ev) => {
         ev.preventDefault();
+        setIsSubmitting(true);
+        addJob({
+          title: jobTitle,
+          level,
+          department,
+          summary,
+          headcount,
+          descriptions: [],
+          requirements: [],
+        }).then(() => {
+          setIsSubmitting(false);
+        });
       }}
     >
       <Card>
@@ -110,7 +132,9 @@ const CareerForm = () => {
           </Field>
         </CardBody>
         <CardFooter className="text-right">
-          <Button type="submit">ADD</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "ADDING..." : "ADD"}
+          </Button>
         </CardFooter>
       </Card>
     </form>
