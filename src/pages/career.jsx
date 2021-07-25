@@ -13,6 +13,7 @@ const getJobs = () =>
 export const Careers = () => {
   const [clicked, setClicked] = React.useState(false);
   const [jobs, setJobs] = React.useState(undefined);
+  const loadJobs = () => getJobs().then((result) => setJobs(result));
 
   return (
     <div className="max-w-6xl mx-auto px-3 py-12 space-y-6">
@@ -22,7 +23,7 @@ export const Careers = () => {
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-5">
-        <CareerForm />
+        <CareerForm onSuccess={() => loadJobs()} />
         <div>
           <div className="space-y-3">
             {jobs &&
@@ -41,7 +42,7 @@ export const Careers = () => {
               <Button
                 onClick={() => {
                   setClicked(true);
-                  getJobs().then((result) => setJobs(result));
+                  loadJobs();
                 }}
               >
                 {clicked ? "Loading..." : "Load"}
@@ -63,7 +64,7 @@ const addJob = (job) =>
     method: "POST",
   }).then((res) => res.json());
 
-const CareerForm = () => {
+const CareerForm = ({ onSuccess }) => {
   const [jobTitle, setJobTitle] = React.useState("");
   const [level, setLevel] = React.useState("internship");
   const [department, setDepartment] = React.useState("");
@@ -86,6 +87,7 @@ const CareerForm = () => {
           requirements: [],
         }).then(() => {
           setIsSubmitting(false);
+          onSuccess();
         });
       }}
     >
