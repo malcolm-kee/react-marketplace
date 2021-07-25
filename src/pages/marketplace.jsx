@@ -48,6 +48,79 @@ export const Marketplace = () => {
           )}
         </div>
       </div>
+      <ListingForm />
     </div>
   );
 };
+
+const ListingForm = () => {
+  return (
+    <div className="flex-initial bg-white w-full lg:max-w-md border-b border-gray-100">
+      <form className="flex flex-col h-full">
+        <div className="py-6 px-4 bg-pink-700 sm:px-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-medium text-white">New Listing</h2>
+          </div>
+          <div className="mt-1">
+            <p className="text-sm text-pink-300">
+              Get started by filling in the information below to create your new
+              listing.
+            </p>
+          </div>
+        </div>
+        <div className="px-4 sm:px-6 pb-12">
+          <div className="space-y-6 pt-6 pb-5">
+            <Field label="Title">
+              <input
+                type="text"
+                className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md"
+              />
+            </Field>
+            <Field label="Price">
+              <input
+                type="number"
+                className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md"
+              />
+            </Field>
+            <Field label="Description">
+              <textarea
+                className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md"
+                rows={4}
+              />
+            </Field>
+            <Field label="Condition">
+              <select className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md">
+                <option value="new">New</option>
+                <option value="used_like-new">Used (like new)</option>
+                <option value="used_good">Used (good)</option>
+                <option value="used_fair">Used (fair)</option>
+              </select>
+            </Field>
+            <Field label="Availability">
+              <select className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md">
+                <option value="in-stock">In Stock</option>
+                <option value="single-item">Single Item</option>
+              </select>
+            </Field>
+            <Field label="Number of Available Stock">
+              <input
+                type="number"
+                className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md"
+              />
+            </Field>
+          </div>
+        </div>
+        <div className="flex-shrink-0 px-4 py-4 flex justify-end border-t border-gray-200">
+          <Button type="submit">ADD</Button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+const Field = ({ children, label }) => (
+  <div>
+    <label className="block text-sm font-medium text-gray-900">{label}</label>
+    <div className="mt-1">{children}</div>
+  </div>
+);
