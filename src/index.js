@@ -1,8 +1,10 @@
-import { showNow } from "./show-now";
-import { showWeekday } from "./show-weekday";
+import * as ReactDOM from "react-dom";
+import * as React from "react";
+import { CareerItem } from "./components/career-item";
 
-showNow();
-
-setInterval(showNow, 1000);
-
-showWeekday();
+ReactDOM.render(
+  <div className="max-w-xl mx-auto p-6">
+    <CareerItem />
+  </div>,
+  document.querySelector("#root")
+);
