@@ -72,6 +72,8 @@ const CareerForm = ({ onSuccess }) => {
   const [headcount, setHeadcount] = React.useState(1);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
+  const titleInputRef = React.useRef();
+
   return (
     <form
       onSubmit={(ev) => {
@@ -88,6 +90,15 @@ const CareerForm = ({ onSuccess }) => {
         }).then(() => {
           setIsSubmitting(false);
           onSuccess();
+          setJobTitle("");
+          setLevel("internship");
+          setDepartment("");
+          setSummary("");
+          setHeadcount(1);
+
+          if (titleInputRef.current) {
+            titleInputRef.current.focus();
+          }
         });
       }}
     >
@@ -100,6 +111,7 @@ const CareerForm = ({ onSuccess }) => {
               type="text"
               onChange={(ev) => setJobTitle(ev.target.value)}
               required
+              ref={titleInputRef}
             />
           </Field>
           <Field label="Level">
