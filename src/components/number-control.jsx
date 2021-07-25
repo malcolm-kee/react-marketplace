@@ -1,8 +1,6 @@
 import * as React from "react";
 
-export const NumberControl = () => {
-  const [value, setValue] = React.useState(1);
-
+export const NumberControl = ({ value, onChange }) => {
   return (
     <div className="mt-1 sm:mt-0 sm:col-span-2">
       <div className="relative w-32">
@@ -11,7 +9,7 @@ export const NumberControl = () => {
           className="absolute left-0 inset-y-0 px-1.5 text-gray-400"
           onClick={() => {
             if (value > 0) {
-              setValue(value - 1);
+              onChange(value - 1);
             }
           }}
         >
@@ -41,7 +39,7 @@ export const NumberControl = () => {
             const numValue = Number(value);
 
             if (!isNaN(numValue)) {
-              setValue(numValue);
+              onChange(numValue);
             }
           }}
         />
@@ -49,7 +47,7 @@ export const NumberControl = () => {
           type="button"
           className="absolute right-0 inset-y-0 px-1.5 text-gray-400"
           onClick={() => {
-            setValue(value + 1);
+            onChange(value + 1);
           }}
         >
           <svg
