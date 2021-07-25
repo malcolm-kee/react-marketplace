@@ -1,6 +1,9 @@
 import { CareerItem } from "../components/career-item";
 import { Button } from "../components/button";
 import * as React from "react";
+import { Card, CardBody, CardFooter, CardHeading } from "../components/card";
+import { Field } from "../components/field";
+import { NumberControl } from "../components/number-control";
 
 const getJobs = () =>
   fetch("https://ecomm-service.herokuapp.com/job?limit=5").then((res) =>
@@ -18,7 +21,8 @@ export const Careers = () => {
           <h1 className="text-6xl mb-4 font-extrabold">Careers</h1>
         </div>
       </div>
-      <div>
+      <div className="grid md:grid-cols-2 gap-5">
+        <CareerForm />
         <div>
           <div className="space-y-3">
             {jobs &&
@@ -47,5 +51,68 @@ export const Careers = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const CareerForm = () => {
+  const [jobTitle, setJobTitle] = React.useState("");
+  const [level, setLevel] = React.useState("internship");
+  const [department, setDepartment] = React.useState("");
+  const [summary, setSummary] = React.useState("");
+  const [headcount, setHeadcount] = React.useState(1);
+
+  return (
+    <form
+      onSubmit={(ev) => {
+        ev.preventDefault();
+      }}
+    >
+      <Card>
+        <CardHeading>Add Job Posting</CardHeading>
+        <CardBody className="space-y-5">
+          <Field label="Job Title">
+            <input
+              value={jobTitle}
+              type="text"
+              onChange={(ev) => setJobTitle(ev.target.value)}
+              required
+            />
+          </Field>
+          <Field label="Level">
+            <select
+              value={level}
+              onChange={(ev) => setLevel(ev.target.value)}
+              required
+            >
+              <option value="internship">Internship</option>
+              <option value="entry">Entry</option>
+              <option value="experienced">Experienced</option>
+              <option value="manager">Manager</option>
+            </select>
+          </Field>
+          <Field label="Department">
+            <input
+              type="text"
+              value={department}
+              onChange={(ev) => setDepartment(ev.target.value)}
+              required
+            />
+          </Field>
+          <Field label="Summary">
+            <textarea
+              value={summary}
+              onChange={(ev) => setSummary(ev.target.value)}
+              required
+            />
+          </Field>
+          <Field label="Headcount">
+            <NumberControl value={headcount} onChange={setHeadcount} />
+          </Field>
+        </CardBody>
+        <CardFooter className="text-right">
+          <Button type="submit">ADD</Button>
+        </CardFooter>
+      </Card>
+    </form>
   );
 };
