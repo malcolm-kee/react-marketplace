@@ -39,7 +39,13 @@ export const NumberControl = () => {
           required
           className="block w-full px-9 text-center shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md"
           value={value}
-          onChange={(ev) => setValue(ev.target.value)}
+          onChange={(ev) => {
+            const value = Number(ev.target.value);
+
+            if (!isNaN(value)) {
+              setValue(value);
+            }
+          }}
         />
         <button
           type="button"
