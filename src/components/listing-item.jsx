@@ -18,11 +18,11 @@ const EditButton = () => (
   </button>
 );
 
-const DeleteButton = () => (
+const DeleteButton = ({ text, onClick }) => (
   <button
     type="button"
     className="inline-flex justify-center items-center py-2 px-4 border border-pink-500 shadow-sm text-sm font-medium rounded-md text-pink-500 bg-white hover:text-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-    onClick={() => alert("Delete btn clicked, delete the item!")}
+    onClick={onClick}
   >
     <svg
       className="w-4 h-4 mr-1.5"
@@ -36,7 +36,7 @@ const DeleteButton = () => (
         clipRule="evenodd"
       ></path>
     </svg>
-    DELETE
+    {text}
   </button>
 );
 
@@ -47,6 +47,8 @@ const Badge = ({ children }) => (
 );
 
 export const ListingItem = (props) => {
+  const [isDeleting, setIsDeleting] = React.useState(false);
+
   return (
     <div className="relative flex flex-col">
       <div className="group block w-full rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-pink-500 overflow-hidden">
@@ -82,7 +84,10 @@ export const ListingItem = (props) => {
         </div>
         <div className="flex flex-col md:flex-row gap-3 py-3">
           <EditButton />
-          <DeleteButton />
+          <DeleteButton
+            text={isDeleting ? "DELETING..." : "DELETE"}
+            onClick={() => setIsDeleting(!isDeleting)}
+          />
         </div>
       </div>
     </div>
