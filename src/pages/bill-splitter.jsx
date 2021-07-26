@@ -77,7 +77,13 @@ const Label = (props) => (
 export const BillSplitter = () => {
   const [billTotal, setBillTotal] = React.useState("");
   const [pax, setPax] = React.useState(0);
-  const [result, setResult] = React.useState("0.00");
+
+  const billTotalValue = Number(billTotal);
+
+  const result =
+    !isNaN(billTotalValue) && billTotalValue && pax
+      ? (billTotalValue / pax).toFixed(2)
+      : "";
 
   return (
     <div className="max-w-4xl mx-auto px-3 py-12 space-y-6">
@@ -100,21 +106,6 @@ export const BillSplitter = () => {
           <div>
             <Label htmlFor="pax">Pax</Label>
             <NumberControl id="pax" value={pax} onChange={setPax} />
-          </div>
-          <div className="text-right">
-            <button
-              type="button"
-              className="w-full px-3 py-1 bg-pink-500 text-white rounded shadow"
-              onClick={() => {
-                const billTotalValue = Number(billTotal);
-
-                if (!isNaN(billTotalValue) && pax > 0) {
-                  setResult((billTotalValue / pax).toFixed(2));
-                }
-              }}
-            >
-              Split
-            </button>
           </div>
         </div>
         <div className="space-y-5">
