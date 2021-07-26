@@ -1,5 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Marketplace } from "./pages/marketplace";
+import { NumberControl } from "./components/number-control";
 
-ReactDOM.render(<Marketplace />, document.querySelector("#root"));
+ReactDOM.render(<NumberControl />, document.querySelector("#root"));
