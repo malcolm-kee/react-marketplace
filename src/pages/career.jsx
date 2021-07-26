@@ -180,6 +180,7 @@ export const Career = () => {
           level={job.level}
           onEdit={() => alert("Edit btn clicked, populate the form!")}
           onDelete={() => alert("Delete btn clicked, delete the item!")}
+          key={job._id}
         />
       ))}
     </div>
