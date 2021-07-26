@@ -1,8 +1,6 @@
 import * as React from "react";
 
-const NumberControl = (props) => {
-  const [value, setValue] = React.useState(1);
-
+const NumberControl = ({ value, onChange, id }) => {
   return (
     <div className="relative">
       <button
@@ -10,7 +8,7 @@ const NumberControl = (props) => {
         className="absolute left-0 inset-y-0 px-1.5 text-gray-400"
         onClick={() => {
           if (value > 0) {
-            setValue(value - 1);
+            onChange(value - 1);
           }
         }}
       >
@@ -39,16 +37,16 @@ const NumberControl = (props) => {
           const numValue = Number(value);
 
           if (!isNaN(numValue)) {
-            setValue(numValue);
+            onChange(numValue);
           }
         }}
-        id={props.id}
+        id={id}
       />
       <button
         type="button"
         className="absolute right-0 inset-y-0 px-1.5 text-gray-400"
         onClick={() => {
-          setValue(value + 1);
+          onChange(value + 1);
         }}
       >
         <svg
@@ -77,6 +75,10 @@ const Label = (props) => (
 );
 
 export const BillSplitter = () => {
+  const [billTotal, setBillTotal] = React.useState("");
+  const [pax, setPax] = React.useState(0);
+  const [result, setResult] = React.useState("0.00");
+
   return (
     <div className="max-w-4xl mx-auto px-3 py-12 space-y-6">
       <div>
@@ -91,16 +93,25 @@ export const BillSplitter = () => {
               id="billTotal"
               className="block w-full rounded-md focus:ring-pink-500 focus:border-pink-500 border-gray-300"
               required
+              value={billTotal}
+              onChange={(ev) => setBillTotal(ev.target.value)}
             />
           </div>
           <div>
             <Label htmlFor="pax">Pax</Label>
-            <NumberControl id="pax" />
+            <NumberControl id="pax" value={pax} onChange={setPax} />
           </div>
           <div className="text-right">
             <button
               type="button"
               className="w-full px-3 py-1 bg-pink-500 text-white rounded shadow"
+              onClick={() => {
+                const billTotalValue = Number(billTotal);
+
+                if (!isNaN(billTotalValue) && pax > 0) {
+                  setResult((billTotalValue / pax).toFixed(2));
+                }
+              }}
             >
               Split
             </button>
@@ -111,7 +122,7 @@ export const BillSplitter = () => {
           <div>
             <output>
               <span id="result" className="text-6xl tabular-nums font-mono">
-                0.00
+                {result}
               </span>
             </output>
           </div>
