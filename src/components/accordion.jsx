@@ -3,6 +3,8 @@ import * as React from "react";
 export const Accordion = ({ title, children }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
+  console.log(`Accordion with ${title} is run.`);
+
   return (
     <div className="pt-6">
       <div className="text-lg">
