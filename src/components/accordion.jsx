@@ -1,8 +1,6 @@
 import * as React from "react";
 
-export const Accordion = ({ title, children }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-
+export const Accordion = ({ title, children, isExpanded, onToggle }) => {
   console.log(`Accordion with ${title} is run.`);
 
   return (
@@ -11,7 +9,7 @@ export const Accordion = ({ title, children }) => {
         <button
           type="button"
           className="flex w-full items-center justify-between text-gray-400 focus:outline-none focus:ring focus:ring-offset-4"
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={onToggle}
         >
           <span className="font-medium text-gray-900">{title}</span>
           <span className="ml-6 h-7 flex items-center">
