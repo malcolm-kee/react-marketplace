@@ -4,13 +4,21 @@ import { CareerItem } from "./components/career-item";
 // import { ListingItem } from "./components/listing-item";
 
 ReactDOM.render(
-  <div className="max-w-xl mx-auto p-6">
+  <div className="max-w-xl mx-auto p-6 space-y-5">
     <CareerItem
       title="Memer"
       department="UI / UX Design"
       level="Experienced"
       onEdit={() => alert("Edit btn clicked, populate the form!")}
       onDelete={() => alert("Delete btn clicked, delete the item!")}
+    />
+    <CareerItem
+      title="GitHub Issue Commentor"
+      department="Engineering"
+      level="Internship"
+      onEdit={() => alert("Edit btn clicked, populate the form!")}
+      onDelete={() => alert("Delete btn clicked, delete the item!")}
+      studentFriendly
     />
   </div>,
   document.querySelector("#root")
