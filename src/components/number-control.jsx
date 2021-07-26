@@ -38,8 +38,8 @@ export const NumberControl = () => {
           name="headcount"
           required
           className="block w-full px-9 text-center shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md"
-          readOnly
           value={value}
+          onChange={(ev) => setValue(ev.target.value)}
         />
         <button
           type="button"
