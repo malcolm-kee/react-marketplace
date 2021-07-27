@@ -12,6 +12,56 @@ export const Career = () => {
 
   return (
     <div>
+      <div>
+        <form className="p-3">
+          <div className="text-xl mb-3">Add Job Posting</div>
+          <div className="space-y-5">
+            <div>
+              <label className="block text-sm" htmlFor="title">
+                Job Title
+              </label>
+              <input type="text" name="title" id="title" />
+            </div>
+            <div>
+              <label className="block text-sm" htmlFor="level">
+                Level
+              </label>
+              <select name="level" id="level">
+                <option value="internship">Internship</option>
+                <option value="entry">Entry</option>
+                <option value="experienced">Experienced</option>
+                <option value="manager">Manager</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm" htmlFor="department">
+                Department
+              </label>
+              <input
+                type="text"
+                name="department"
+                id="department"
+                placeholder="e.g. Engineering"
+              />
+            </div>
+            <div>
+              <label className="block text-sm" htmlFor="summary">
+                Summary
+              </label>
+              <textarea name="summary" id="summary" />
+            </div>
+            <div>
+              <label className="block text-sm" htmlFor="headcount">
+                Headcount
+              </label>
+              <input type="number" name="headcount" id="headcount" />
+            </div>
+            <div>
+              <button>ADD</button>
+            </div>
+          </div>
+        </form>
+      </div>
       <div className="max-w-xl mx-auto p-6 space-y-5">
         {jobs &&
           jobs.map((job) => (
