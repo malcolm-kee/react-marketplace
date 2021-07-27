@@ -9,24 +9,52 @@ const getJobs = () =>
 export const Career = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [jobs, setJobs] = React.useState(undefined);
+  const [title, setTitle] = React.useState("");
+  const [level, setLevel] = React.useState("internship");
+  const [department, setDepartment] = React.useState("");
+  const [summary, setSummary] = React.useState("");
+  const [headcount, setHeadcount] = React.useState(1);
 
   return (
     <div>
       <div>
-        <form className="p-3">
+        <form
+          onSubmit={(ev) => {
+            ev.preventDefault();
+            console.log({
+              title,
+              level,
+              department,
+              summary,
+              headcount,
+            });
+          }}
+          className="p-3"
+        >
           <div className="text-xl mb-3">Add Job Posting</div>
           <div className="space-y-5">
             <div>
               <label className="block text-sm" htmlFor="title">
                 Job Title
               </label>
-              <input type="text" name="title" id="title" />
+              <input
+                type="text"
+                name="title"
+                id="title"
+                value={title}
+                onChange={(ev) => setTitle(ev.target.value)}
+              />
             </div>
             <div>
               <label className="block text-sm" htmlFor="level">
                 Level
               </label>
-              <select name="level" id="level">
+              <select
+                name="level"
+                id="level"
+                value={level}
+                onChange={(ev) => setLevel(ev.target.value)}
+              >
                 <option value="internship">Internship</option>
                 <option value="entry">Entry</option>
                 <option value="experienced">Experienced</option>
@@ -39,6 +67,8 @@ export const Career = () => {
               </label>
               <input
                 type="text"
+                value={department}
+                onChange={(ev) => setDepartment(ev.target.value)}
                 name="department"
                 id="department"
                 placeholder="e.g. Engineering"
@@ -48,13 +78,24 @@ export const Career = () => {
               <label className="block text-sm" htmlFor="summary">
                 Summary
               </label>
-              <textarea name="summary" id="summary" />
+              <textarea
+                name="summary"
+                id="summary"
+                value={summary}
+                onChange={(ev) => setSummary(ev.target.value)}
+              />
             </div>
             <div>
               <label className="block text-sm" htmlFor="headcount">
                 Headcount
               </label>
-              <input type="number" name="headcount" id="headcount" />
+              <input
+                type="number"
+                name="headcount"
+                id="headcount"
+                value={headcount}
+                onChange={(ev) => setHeadcount(ev.target.value)}
+              />
             </div>
             <div>
               <button>ADD</button>
