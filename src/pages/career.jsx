@@ -24,6 +24,8 @@ export const Career = () => {
   const [summary, setSummary] = React.useState("");
   const [headcount, setHeadcount] = React.useState(1);
 
+  const loadJobs = () => getJobs().then((data) => setJobs(data));
+
   return (
     <div>
       <div>
@@ -36,7 +38,7 @@ export const Career = () => {
               department,
               summary,
               headcount: Number(headcount),
-            });
+            }).then(() => loadJobs());
           }}
           className="p-3"
         >
@@ -135,7 +137,7 @@ export const Career = () => {
           <button
             onClick={() => {
               setIsLoading(true);
-              getJobs().then((data) => setJobs(data));
+              loadJobs();
             }}
           >
             {isLoading ? "Loading..." : "Load"}
