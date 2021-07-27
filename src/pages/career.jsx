@@ -52,6 +52,7 @@ export const Career = () => {
                 id="title"
                 value={title}
                 onChange={(ev) => setTitle(ev.target.value)}
+                required
               />
             </div>
             <div>
@@ -63,6 +64,7 @@ export const Career = () => {
                 id="level"
                 value={level}
                 onChange={(ev) => setLevel(ev.target.value)}
+                required
               >
                 <option value="internship">Internship</option>
                 <option value="entry">Entry</option>
@@ -81,6 +83,7 @@ export const Career = () => {
                 name="department"
                 id="department"
                 placeholder="e.g. Engineering"
+                required
               />
             </div>
             <div>
@@ -92,6 +95,7 @@ export const Career = () => {
                 id="summary"
                 value={summary}
                 onChange={(ev) => setSummary(ev.target.value)}
+                required
               />
             </div>
             <div>
@@ -104,6 +108,7 @@ export const Career = () => {
                 id="headcount"
                 value={headcount}
                 onChange={(ev) => setHeadcount(ev.target.value)}
+                required
               />
             </div>
             <div>
