@@ -171,18 +171,27 @@ const jobs = [
 ];
 
 export const Career = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
+
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-5">
-      {jobs.map((job) => (
-        <CareerItem
-          title={job.title}
-          department={job.department}
-          level={job.level}
-          onEdit={() => alert("Edit btn clicked, populate the form!")}
-          onDelete={() => alert("Delete btn clicked, delete the item!")}
-          key={job._id}
-        />
-      ))}
+    <div>
+      <div className="max-w-xl mx-auto p-6 space-y-5">
+        {jobs.map((job) => (
+          <CareerItem
+            title={job.title}
+            department={job.department}
+            level={job.level}
+            onEdit={() => alert("Edit btn clicked, populate the form!")}
+            onDelete={() => alert("Delete btn clicked, delete the item!")}
+            key={job._id}
+          />
+        ))}
+      </div>
+      <div className="text-center">
+        <button onClick={() => setIsLoading(true)}>
+          {isLoading ? "Loading..." : "Load"}
+        </button>
+      </div>
     </div>
   );
 };
