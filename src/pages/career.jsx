@@ -6,6 +6,15 @@ const getJobs = () =>
     res.json()
   );
 
+const createJob = (data) =>
+  fetch("https://ecomm-service.herokuapp.com/job", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
 export const Career = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [jobs, setJobs] = React.useState(undefined);
@@ -21,12 +30,12 @@ export const Career = () => {
         <form
           onSubmit={(ev) => {
             ev.preventDefault();
-            console.log({
+            createJob({
               title,
               level,
               department,
               summary,
-              headcount,
+              headcount: Number(headcount),
             });
           }}
           className="p-3"
