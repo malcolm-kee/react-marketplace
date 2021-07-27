@@ -19,6 +19,8 @@ export const Marketplace = () => {
   const [listings, setListings] = React.useState(undefined);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const loadListings = () => getListings().then((data) => setListings(data));
+
   const [title, setTitle] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -38,7 +40,7 @@ export const Marketplace = () => {
             condition,
             availability,
             numOfStock: Number(numOfStock),
-          });
+          }).then(() => loadListings());
         }}
       >
         <div className="p-3">New Listing</div>
@@ -52,6 +54,7 @@ export const Marketplace = () => {
               id="title"
               value={title}
               onChange={(ev) => setTitle(ev.target.value)}
+              required
             />
           </div>
           <div>
@@ -63,6 +66,7 @@ export const Marketplace = () => {
               id="price"
               value={price}
               onChange={(ev) => setPrice(ev.target.value)}
+              required
             />
           </div>
           <div>
@@ -73,6 +77,7 @@ export const Marketplace = () => {
               id="description"
               value={description}
               onChange={(ev) => setDescription(ev.target.value)}
+              required
             />
           </div>
           <div>
@@ -83,6 +88,7 @@ export const Marketplace = () => {
               id="condition"
               value={condition}
               onChange={(ev) => setCondition(ev.target.value)}
+              required
             >
               <option value="new">New</option>
               <option value="used_like-new">Used (like new)</option>
@@ -98,6 +104,7 @@ export const Marketplace = () => {
               id="availability"
               value={availability}
               onChange={(ev) => setAvailability(ev.target.value)}
+              required
             >
               <option value="in-stock">In Stock</option>
               <option value="single-item">Single Item</option>
@@ -112,6 +119,7 @@ export const Marketplace = () => {
               id="numOfStock"
               value={numOfStock}
               onChange={(ev) => setNumOfStock(ev.target.value)}
+              required
             />
           </div>
           <div>
@@ -139,7 +147,7 @@ export const Marketplace = () => {
             <button
               onClick={() => {
                 setIsLoading(true);
-                getListings().then((data) => setListings(data));
+                loadListings();
               }}
               type="button"
             >
