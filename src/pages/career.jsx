@@ -32,10 +32,10 @@ export const Career = () => {
   const [jobs, setJobs] = React.useState(undefined);
   const [title, setTitle] = usePersistedState("jobTitle", "");
 
-  const [level, setLevel] = React.useState("internship");
-  const [department, setDepartment] = React.useState("");
-  const [summary, setSummary] = React.useState("");
-  const [headcount, setHeadcount] = React.useState(1);
+  const [level, setLevel] = usePersistedState("level", "internship");
+  const [department, setDepartment] = usePersistedState("department", "");
+  const [summary, setSummary] = usePersistedState("summary", "");
+  const [headcount, setHeadcount] = usePersistedState("headcount", 1);
 
   const titleInputRef = React.useRef();
 
