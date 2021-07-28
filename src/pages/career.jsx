@@ -28,7 +28,6 @@ const usePersistedState = (storageKey, defaultValue) => {
 };
 
 export const Career = () => {
-  const [isLoading, setIsLoading] = React.useState(false);
   const [jobs, setJobs] = React.useState(undefined);
   const [title, setTitle] = usePersistedState("jobTitle", "");
 
@@ -40,6 +39,10 @@ export const Career = () => {
   const titleInputRef = React.useRef();
 
   const loadJobs = () => getJobs().then((data) => setJobs(data));
+
+  React.useEffect(() => {
+    loadJobs();
+  }, []);
 
   return (
     <div>
@@ -159,18 +162,6 @@ export const Career = () => {
             />
           ))}
       </div>
-      {!jobs && (
-        <div className="text-center">
-          <button
-            onClick={() => {
-              setIsLoading(true);
-              loadJobs();
-            }}
-          >
-            {isLoading ? "Loading..." : "Load"}
-          </button>
-        </div>
-      )}
     </div>
   );
 };
