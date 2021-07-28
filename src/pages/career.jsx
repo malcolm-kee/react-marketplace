@@ -1,10 +1,12 @@
 import * as React from "react";
 import { CareerItem } from "../components/career-item";
 
-const getJobs = (page) =>
-  fetch(`https://ecomm-service.herokuapp.com/job?limit=5&page=${page}`).then(
-    (res) => res.json()
-  );
+const getJobs = (page) => {
+  return fetch(
+    `https://ecomm-service.herokuapp.com/job?limit=5&page=${page}` +
+      (page === 2 ? "&delay=3000" : "")
+  ).then((res) => res.json());
+};
 
 const createJob = (data) =>
   fetch("https://ecomm-service.herokuapp.com/job", {
