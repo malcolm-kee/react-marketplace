@@ -1,9 +1,9 @@
 import * as React from "react";
 import { CareerItem } from "../components/career-item";
 
-const getJobs = () =>
-  fetch("https://ecomm-service.herokuapp.com/job?limit=5").then((res) =>
-    res.json()
+const getJobs = (page) =>
+  fetch(`https://ecomm-service.herokuapp.com/job?limit=5&page=${page}`).then(
+    (res) => res.json()
   );
 
 const createJob = (data) =>
@@ -38,11 +38,13 @@ export const Career = () => {
 
   const titleInputRef = React.useRef();
 
-  const loadJobs = () => getJobs().then((data) => setJobs(data));
+  const loadJobs = (pageNum) => getJobs(pageNum).then((data) => setJobs(data));
+
+  const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
-    loadJobs();
-  }, []);
+    loadJobs(page);
+  }, [page]);
 
   return (
     <div>
@@ -148,6 +150,18 @@ export const Career = () => {
             </div>
           </div>
         </form>
+      </div>
+      <div className="flex justify-between max-w-xl mx-auto">
+        <button
+          type="button"
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+        >
+          Prev
+        </button>
+        <button type="button" onClick={() => setPage(page + 1)}>
+          Next
+        </button>
       </div>
       <div className="max-w-xl mx-auto p-6 space-y-5">
         {jobs &&
