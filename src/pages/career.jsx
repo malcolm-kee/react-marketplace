@@ -19,13 +19,13 @@ export const Career = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [jobs, setJobs] = React.useState(undefined);
   const [title, setTitle] = React.useState(
-    sessionStorage.getItem("jobTitle") || ""
+    () => sessionStorage.getItem("jobTitle") || ""
   );
 
   React.useEffect(() => {
     console.log("setting job title");
     sessionStorage.setItem("jobTitle", title);
-  });
+  }, [title]);
 
   const [level, setLevel] = React.useState("internship");
   const [department, setDepartment] = React.useState("");
