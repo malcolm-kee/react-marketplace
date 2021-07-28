@@ -15,17 +15,22 @@ const createJob = (data) =>
     body: JSON.stringify(data),
   });
 
-export const Career = () => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [jobs, setJobs] = React.useState(undefined);
-  const [title, setTitle] = React.useState(
-    () => sessionStorage.getItem("jobTitle") || ""
+const usePersistedState = (storageKey, defaultValue) => {
+  const [value, setValue] = React.useState(
+    () => sessionStorage.getItem(storageKey) || defaultValue
   );
 
   React.useEffect(() => {
-    console.log("setting job title");
-    sessionStorage.setItem("jobTitle", title);
-  }, [title]);
+    sessionStorage.setItem(storageKey, value);
+  }, [value, storageKey]);
+
+  return [value, setValue];
+};
+
+export const Career = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [jobs, setJobs] = React.useState(undefined);
+  const [title, setTitle] = usePersistedState("jobTitle", "");
 
   const [level, setLevel] = React.useState("internship");
   const [department, setDepartment] = React.useState("");
