@@ -24,6 +24,8 @@ export const Career = () => {
   const [summary, setSummary] = React.useState("");
   const [headcount, setHeadcount] = React.useState(1);
 
+  const titleInputRef = React.useRef();
+
   const loadJobs = () => getJobs().then((data) => setJobs(data));
 
   return (
@@ -45,6 +47,10 @@ export const Career = () => {
               setDepartment("");
               setSummary("");
               setHeadcount(1);
+
+              if (titleInputRef.current) {
+                titleInputRef.current.focus();
+              }
             });
           }}
           className="p-3"
@@ -62,6 +68,7 @@ export const Career = () => {
                 value={title}
                 onChange={(ev) => setTitle(ev.target.value)}
                 required
+                ref={titleInputRef}
               />
             </div>
             <div>
