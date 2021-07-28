@@ -15,24 +15,34 @@ const createListing = (data) =>
     },
   }).then((res) => res.json());
 
+const usePersistedState = (storageKey, defaultValue) => {
+  const [value, setValue] = React.useState(
+    () => sessionStorage.getItem(storageKey) || defaultValue
+  );
+
+  React.useEffect(() => {
+    sessionStorage.setItem(storageKey, value);
+  }, [value, storageKey]);
+
+  return [value, setValue];
+};
+
 export const Marketplace = () => {
   const [listings, setListings] = React.useState(undefined);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const loadListings = () => getListings().then((data) => setListings(data));
 
-  const [title, setTitle] = React.useState(
-    () => sessionStorage.getItem("title") || ""
-  );
-  React.useEffect(() => {
-    sessionStorage.setItem("title", title);
-  }, [title]);
+  const [title, setTitle] = usePersistedState("title", "");
 
-  const [price, setPrice] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [condition, setCondition] = React.useState("new");
-  const [availability, setAvailability] = React.useState("in-stock");
-  const [numOfStock, setNumOfStock] = React.useState("");
+  const [price, setPrice] = usePersistedState("price", "");
+  const [description, setDescription] = usePersistedState("description", "");
+  const [condition, setCondition] = usePersistedState("condition", "new");
+  const [availability, setAvailability] = usePersistedState(
+    "availability",
+    "in-stock"
+  );
+  const [numOfStock, setNumOfStock] = usePersistedState("numOfStock", "");
 
   const titleInputRef = React.useRef();
 
