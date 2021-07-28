@@ -28,6 +28,8 @@ export const Marketplace = () => {
   const [availability, setAvailability] = React.useState("in-stock");
   const [numOfStock, setNumOfStock] = React.useState("");
 
+  const titleInputRef = React.useRef();
+
   return (
     <div>
       <form
@@ -40,7 +42,19 @@ export const Marketplace = () => {
             condition,
             availability,
             numOfStock: Number(numOfStock),
-          }).then(() => loadListings());
+          }).then(() => {
+            loadListings();
+            setTitle("");
+            setPrice("");
+            setDescription("");
+            setCondition("new");
+            setAvailability("in-stock");
+            setNumOfStock("");
+
+            if (titleInputRef.current) {
+              titleInputRef.current.focus();
+            }
+          });
         }}
       >
         <div className="p-3">New Listing</div>
@@ -55,6 +69,7 @@ export const Marketplace = () => {
               value={title}
               onChange={(ev) => setTitle(ev.target.value)}
               required
+              ref={titleInputRef}
             />
           </div>
           <div>
