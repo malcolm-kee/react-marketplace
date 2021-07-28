@@ -38,7 +38,14 @@ export const Career = () => {
               department,
               summary,
               headcount: Number(headcount),
-            }).then(() => loadJobs());
+            }).then(() => {
+              loadJobs();
+              setTitle("");
+              setLevel("internship");
+              setDepartment("");
+              setSummary("");
+              setHeadcount(1);
+            });
           }}
           className="p-3"
         >
