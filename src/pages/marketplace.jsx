@@ -21,7 +21,13 @@ export const Marketplace = () => {
 
   const loadListings = () => getListings().then((data) => setListings(data));
 
-  const [title, setTitle] = React.useState("");
+  const [title, setTitle] = React.useState(
+    () => sessionStorage.getItem("title") || ""
+  );
+  React.useEffect(() => {
+    sessionStorage.setItem("title", title);
+  }, [title]);
+
   const [price, setPrice] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [condition, setCondition] = React.useState("new");
