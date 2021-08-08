@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 
 export const Accordion = ({ title, children, isExpanded, onToggle }) => {
   console.log(`Accordion with ${title} is run.`);
@@ -36,4 +37,11 @@ export const Accordion = ({ title, children, isExpanded, onToggle }) => {
       {isExpanded && <div className="mt-2 pr-12">{children}</div>}
     </div>
   );
+};
+
+Accordion.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  isExpanded: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func.isRequired,
 };
