@@ -40,6 +40,10 @@ export const Accordion = ({ title, children, isExpanded, onToggle }) => {
 };
 
 Accordion.propTypes = {
+  /**
+   * Text that will be always displayed, usually a summary
+   * of the content.
+   */
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   isExpanded: PropTypes.bool.isRequired,
