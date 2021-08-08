@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { classNames } from "../lib/classnames";
+import classNames from "classnames";
 
 /**
  * Unspecified props will be spreaded into underlying `span`.
