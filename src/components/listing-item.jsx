@@ -1,10 +1,10 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { Button } from "./button";
 
 const EditButton = () => (
-  <button
-    type="button"
-    className="inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+  <Button
+    variant="primary"
     onClick={() => alert("Edit btn clicked, populate the form!")}
   >
     <svg
@@ -16,15 +16,11 @@ const EditButton = () => (
       <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
     </svg>
     EDIT
-  </button>
+  </Button>
 );
 
 const DeleteButton = ({ text, onClick }) => (
-  <button
-    type="button"
-    className="inline-flex justify-center items-center py-2 px-4 border border-pink-500 shadow-sm text-sm font-medium rounded-md text-pink-500 bg-white hover:text-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-    onClick={onClick}
-  >
+  <Button variant="outline" onClick={onClick}>
     <svg
       className="w-4 h-4 mr-1.5"
       fill="currentColor"
@@ -38,7 +34,7 @@ const DeleteButton = ({ text, onClick }) => (
       ></path>
     </svg>
     {text}
-  </button>
+  </Button>
 );
 
 const Badge = ({ children }) => (
