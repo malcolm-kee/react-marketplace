@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 
 const EditButton = () => (
   <button
@@ -92,4 +93,13 @@ export const ListingItem = (props) => {
       </div>
     </div>
   );
+};
+
+ListingItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string,
+  availableStock: PropTypes.number,
+  onlyOne: PropTypes.bool,
 };
