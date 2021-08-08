@@ -1,12 +1,17 @@
 import PropTypes from "prop-types";
+import { classNames } from "../lib/classnames";
 
 /**
  * Unspecified props will be spreaded into underlying `span`.
  */
 export const Badge = ({ color = "gray", ...props }) => (
   <span
-    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${classByColor[color]}`}
     {...props}
+    className={classNames(
+      `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium`,
+      classByColor[color],
+      props.className
+    )}
   />
 );
 

@@ -5,6 +5,8 @@
     Green
   </Badge>
   <Badge color="red">Red</Badge>
-  <Badge color="yellow">Yellow</Badge>
+  <Badge color="yellow" className="ml-5">
+    Yellow
+  </Badge>
 </div>
 ```
