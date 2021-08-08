@@ -100,6 +100,9 @@ ListingItem.propTypes = {
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   imageUrl: PropTypes.string,
+  /**
+   * Required if `onlyOne` is `false`.
+   */
   availableStock: PropTypes.number,
   onlyOne: PropTypes.bool,
 };
