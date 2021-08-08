@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 
-export const Badge = ({ children, color = "gray" }) => (
+/**
+ * Unspecified props will be spreaded into underlying `span`.
+ */
+export const Badge = ({ color = "gray", ...props }) => (
   <span
     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${classByColor[color]}`}
-  >
-    {children}
-  </span>
+    {...props}
+  />
 );
 
 const classByColor = {
