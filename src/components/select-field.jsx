@@ -1,6 +1,6 @@
-import { useId } from "hooks/use-id";
 import PropTypes from "prop-types";
 import * as React from "react";
+import { Field } from "./field";
 import { Label } from "./label";
 import { Select } from "./select";
 
@@ -15,13 +15,11 @@ export const SelectField = React.forwardRef(function SelectField(
   { label, id, ...selectProps },
   ref
 ) {
-  const ensuredId = useId(id);
-
   return (
-    <div className="space-y-1">
-      {label && <Label htmlFor={ensuredId}>{label}</Label>}
-      <Select {...selectProps} id={ensuredId} ref={ref} />
-    </div>
+    <Field fieldId={id}>
+      {label && <Label>{label}</Label>}
+      <Select {...selectProps} ref={ref} />
+    </Field>
   );
 });
 
