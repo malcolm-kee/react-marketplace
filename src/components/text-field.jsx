@@ -1,6 +1,6 @@
-import { useId } from "hooks/use-id";
 import PropTypes from "prop-types";
 import * as React from "react";
+import { Field } from "./field";
 import { Label } from "./label";
 import { TextInput } from "./text-input";
 
@@ -15,13 +15,11 @@ export const TextField = React.forwardRef(function TextField(
   { label, id, ...inputProps },
   ref
 ) {
-  const ensuredId = useId(id);
-
   return (
-    <div className="space-y-1">
-      {label && <Label htmlFor={ensuredId}>{label}</Label>}
-      <TextInput {...inputProps} id={ensuredId} ref={ref} />
-    </div>
+    <Field fieldId={id}>
+      {label && <Label>{label}</Label>}
+      <TextInput {...inputProps} ref={ref} />
+    </Field>
   );
 });
 
