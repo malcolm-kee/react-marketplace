@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ListingItem } from "../components/listing-item";
+import { Textarea } from "../components/textarea";
 
 const getListings = (page, signal) =>
   fetch(`https://ecomm-service.herokuapp.com/marketplace?page=${page}`, {
@@ -113,10 +114,10 @@ export const Marketplace = () => {
             <label htmlFor="description" className="block text-sm font-medium">
               Description
             </label>
-            <textarea
+            <Textarea
               id="description"
               value={description}
-              onChange={(ev) => setDescription(ev.target.value)}
+              onChangeValue={setDescription}
               required
             />
           </div>
