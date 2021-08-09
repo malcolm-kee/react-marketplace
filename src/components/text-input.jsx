@@ -1,10 +1,16 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
+import * as React from "react";
 
 /**
  * Unspecified props will be spreaded to the underlying `input` element.
+ *
+ * Provided ref will be forwarded to the underlying `input` element.
  */
-export const TextInput = ({ type = "text", onChangeValue, ...props }) => {
+export const TextInput = React.forwardRef(function TextInput(
+  { type = "text", onChangeValue, ...props },
+  forwardedRef
+) {
   return (
     <input
       type={type}
@@ -14,9 +20,10 @@ export const TextInput = ({ type = "text", onChangeValue, ...props }) => {
         props.className
       )}
       onChange={(ev) => onChangeValue(ev.target.value)}
+      ref={forwardedRef}
     />
   );
-};
+});
 
 TextInput.propTypes = {
   onChangeValue: PropTypes.func,
