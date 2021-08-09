@@ -1,6 +1,6 @@
-import { useId } from "hooks/use-id";
 import PropTypes from "prop-types";
 import * as React from "react";
+import { Field } from "./field";
 import { Label } from "./label";
 import { Textarea } from "./textarea";
 
@@ -15,13 +15,11 @@ export const TextareaField = React.forwardRef(function TextareaField(
   { label, id, ...textareaProps },
   ref
 ) {
-  const ensuredId = useId(id);
-
   return (
-    <div className="space-y-1">
-      {label && <Label htmlFor={ensuredId}>{label}</Label>}
-      <Textarea {...textareaProps} id={ensuredId} ref={ref} />
-    </div>
+    <Field fieldId={id}>
+      {label && <Label>{label}</Label>}
+      <Textarea {...textareaProps} ref={ref} />
+    </Field>
   );
 });
 
