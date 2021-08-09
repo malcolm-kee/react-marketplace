@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ListingItem } from "../components/listing-item";
+import { Select } from "../components/select";
 import { Textarea } from "../components/textarea";
 
 const getListings = (page, signal) =>
@@ -125,31 +126,31 @@ export const Marketplace = () => {
             <label htmlFor="condition" className="block text-sm font-medium">
               Condition
             </label>
-            <select
+            <Select
               id="condition"
               value={condition}
-              onChange={(ev) => setCondition(ev.target.value)}
+              onChangeValue={setCondition}
               required
             >
               <option value="new">New</option>
               <option value="used_like-new">Used (like new)</option>
               <option value="used_good">Used (good)</option>
               <option value="used_fair">Used (fair)</option>
-            </select>
+            </Select>
           </div>
           <div>
             <label htmlFor="availability" className="block text-sm font-medium">
               Availability
             </label>
-            <select
+            <Select
               id="availability"
               value={availability}
-              onChange={(ev) => setAvailability(ev.target.value)}
+              onChangeValue={setAvailability}
               required
             >
               <option value="in-stock">In Stock</option>
               <option value="single-item">Single Item</option>
-            </select>
+            </Select>
           </div>
           <div>
             <label htmlFor="numOfStock" className="block text-sm font-medium">
