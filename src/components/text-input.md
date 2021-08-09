@@ -25,3 +25,19 @@ const Demo = () => {
 
 <Demo />;
 ```
+
+```jsx
+import { MailIcon } from "@heroicons/react/outline";
+import { TextInput } from "components/text-input";
+import { Label } from "components/label";
+
+<div className="space-y-3">
+  <Label>Email</Label>
+  <div className="relative">
+    <div className="absolute left-0 inset-y-0 flex items-center p-2 pointer-events-none">
+      <MailIcon className="w-6 h-6 text-gray-400" />
+    </div>
+    <TextInput className="pl-10" />
+  </div>
+</div>;
+```
