@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CareerItem } from "../components/career-item";
+import { TextInput } from "../components/text-input";
 
 const getJobs = (page, signal) => {
   return fetch(
@@ -89,12 +90,11 @@ export const Career = () => {
               <label className="block text-sm" htmlFor="title">
                 Job Title
               </label>
-              <input
-                type="text"
+              <TextInput
                 name="title"
                 id="title"
                 value={title}
-                onChange={(ev) => setTitle(ev.target.value)}
+                onChangeValue={setTitle}
                 required
                 ref={titleInputRef}
               />
@@ -146,12 +146,12 @@ export const Career = () => {
               <label className="block text-sm" htmlFor="headcount">
                 Headcount
               </label>
-              <input
+              <TextInput
                 type="number"
                 name="headcount"
                 id="headcount"
                 value={headcount}
-                onChange={(ev) => setHeadcount(ev.target.value)}
+                onChangeValue={setHeadcount}
                 required
               />
             </div>
