@@ -30,8 +30,9 @@ const Demo = () => {
 import { MailIcon } from "@heroicons/react/outline";
 import { TextInput } from "components/text-input";
 import { Label } from "components/label";
+import { Field } from "components/field";
 
-<div className="space-y-3">
+<Field>
   <Label>Email</Label>
   <div className="relative">
     <div className="absolute left-0 inset-y-0 flex items-center p-2 pointer-events-none">
@@ -39,5 +40,5 @@ import { Label } from "components/label";
     </div>
     <TextInput className="pl-10" />
   </div>
-</div>;
+</Field>;
 ```
