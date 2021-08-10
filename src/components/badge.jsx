@@ -4,16 +4,22 @@ import classNames from "classnames";
 /**
  * Unspecified props will be spreaded into underlying `span`.
  */
-export const Badge = ({ color = "gray", ...props }) => (
-  <span
-    {...props}
-    className={classNames(
-      `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium`,
-      classByColor[color],
-      props.className
-    )}
-  />
-);
+export const Badge = ({ color = "gray", render, ...props }) => {
+  const className = classNames(
+    `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium`,
+    classByColor[color],
+    props.className
+  );
+
+  if (render) {
+    return render({
+      className,
+      ...props,
+    });
+  }
+
+  return <span {...props} className={className} />;
+};
 
 const classByColor = {
   green: "bg-green-100 text-green-800",
@@ -25,4 +31,5 @@ const classByColor = {
 Badge.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.oneOf(["gray", "green", "red", "yellow"]),
+  render: PropTypes.func,
 };

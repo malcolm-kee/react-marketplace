@@ -10,3 +10,14 @@
   </Badge>
 </div>
 ```
+
+You can customize the element to render by using `render` props:
+
+```jsx
+<Badge
+  color="green"
+  render={(bProps) => <a {...bProps} href="https://google.com" />}
+>
+  Google
+</Badge>
+```
