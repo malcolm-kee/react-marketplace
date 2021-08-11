@@ -1,9 +1,18 @@
 import * as React from "react";
 
-const AUTH_DEFAULT_STATE = {
-  status: "anonymous",
-  accessToken: null,
-};
+const ACCESS_TOKEN_STORAGE = "auth";
+
+const storedAccessToken = localStorage.getItem(ACCESS_TOKEN_STORAGE);
+
+const AUTH_DEFAULT_STATE = storedAccessToken
+  ? {
+      status: "authenticated",
+      accessToken: storedAccessToken,
+    }
+  : {
+      status: "anonymous",
+      accessToken: null,
+    };
 
 const AuthContext = React.createContext();
 
@@ -91,6 +100,7 @@ export const useLogin = () => {
   return function invokeLogin({ email, password }) {
     return login(email, password).then((res) => {
       auth.login(res.access_token);
+      localStorage.setItem(ACCESS_TOKEN_STORAGE, res.access_token);
     });
   };
 };
@@ -102,5 +112,8 @@ export const useLogout = () => {
     throw new Error("Your application must be wrapped with AuthProvider");
   }
 
-  return auth.logout;
+  return () => {
+    auth.logout();
+    localStorage.removeItem(ACCESS_TOKEN_STORAGE);
+  };
 };

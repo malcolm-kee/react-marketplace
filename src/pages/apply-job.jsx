@@ -1,5 +1,5 @@
 import { useJobs, CareerItem } from "domains/career";
-import { LoginForm, useAuth } from "domains/auth";
+import { LoginForm, useAuth, LogoutButton } from "domains/auth";
 import * as React from "react";
 
 const createJobApplication = (jobId, token) =>
@@ -34,6 +34,9 @@ export const ApplyJob = () => {
           }}
         />
       )}
+      <div className="p-3 text-center">
+        <LogoutButton />
+      </div>
       <div className="flex justify-between max-w-xl mx-auto">
         <button
           type="button"
