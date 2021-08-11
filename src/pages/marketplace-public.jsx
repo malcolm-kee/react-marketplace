@@ -1,4 +1,4 @@
-import { LoginForm, useAuthState } from "domains/auth";
+import { LoginForm, useAuth, LogoutButton } from "domains/auth";
 import { ListingItem, useListings } from "domains/marketplace";
 import * as React from "react";
 
@@ -23,17 +23,14 @@ const addToCart = (listingId, token) =>
 
 export const MarketplacePublic = () => {
   const { listings } = useListings();
-  const auth = useAuthState();
+  const auth = useAuth();
 
   return (
     <div className="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
-      {auth.status === "anonymous" && (
-        <LoginForm
-          onSuccess={(accessToken) => {
-            auth.login(accessToken);
-          }}
-        />
-      )}
+      {auth.status === "anonymous" && <LoginForm />}
+      <div className="p-3 text-center">
+        <LogoutButton />
+      </div>
       <div className="grid md:grid-cols-2 gap-x-4 gap-y-8 xl:grid-cols-3 xl:gap-x-6">
         {listings &&
           listings.map((item) => (

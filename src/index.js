@@ -2,11 +2,11 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AuthProvider } from "./domains/auth";
 import "./index.css";
-import { ApplyJob } from "./pages/apply-job";
+import { MarketplacePublic } from "./pages/marketplace-public";
 
 ReactDOM.render(
   <AuthProvider>
-    <ApplyJob />
+    <MarketplacePublic />
   </AuthProvider>,
   document.querySelector("#root")
 );
