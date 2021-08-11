@@ -1,5 +1,5 @@
 import { useJobs, CareerItem } from "domains/career";
-import { LoginForm } from "domains/auth";
+import { LoginForm, useAuthState } from "domains/auth";
 import * as React from "react";
 
 const createJobApplication = (jobId, token) =>
@@ -23,16 +23,14 @@ const createJobApplication = (jobId, token) =>
 
 export const ApplyJob = () => {
   const { page, setPage, jobs } = useJobs();
-  const [token, setToken] = React.useState("");
-  const [authStatus, setAuthStatus] = React.useState("anonymous");
+  const auth = useAuthState();
 
   return (
     <div>
-      {authStatus === "anonymous" && (
+      {auth.status === "anonymous" && (
         <LoginForm
           onSuccess={(accessToken) => {
-            setToken(accessToken);
-            setAuthStatus("authenticated");
+            auth.login(accessToken);
           }}
         />
       )}
@@ -56,8 +54,8 @@ export const ApplyJob = () => {
               department={job.department}
               level={job.level}
               onApply={
-                authStatus === "authenticated"
-                  ? () => createJobApplication(job._id, token)
+                auth.status === "authenticated"
+                  ? () => createJobApplication(job._id, auth.accessToken)
                   : undefined
               }
               key={job._id}
