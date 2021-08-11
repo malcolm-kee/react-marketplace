@@ -1,16 +1,6 @@
 import * as React from "react";
-import { CareerItem } from "domains/career";
+import { CareerItem, useJobs } from "domains/career";
 import { TextInput } from "../components/text-input";
-
-const getJobs = (page, signal) => {
-  return fetch(
-    `https://ecomm-service.herokuapp.com/job?limit=5&page=${page}` +
-      (page === 2 ? "&delay=3000" : ""),
-    {
-      signal,
-    }
-  ).then((res) => res.json());
-};
 
 const createJob = (data) =>
   fetch("https://ecomm-service.herokuapp.com/job", {
@@ -34,7 +24,6 @@ const usePersistedState = (storageKey, defaultValue) => {
 };
 
 export const Career = () => {
-  const [jobs, setJobs] = React.useState(undefined);
   const [title, setTitle] = usePersistedState("jobTitle", "");
 
   const [level, setLevel] = usePersistedState("level", "internship");
@@ -44,18 +33,7 @@ export const Career = () => {
 
   const titleInputRef = React.useRef();
 
-  const loadJobs = (pageNum, signal) =>
-    getJobs(pageNum, signal).then((data) => setJobs(data));
-
-  const [page, setPage] = React.useState(1);
-
-  React.useEffect(() => {
-    const ab = new AbortController();
-    loadJobs(page, ab.signal);
-    return () => {
-      ab.abort();
-    };
-  }, [page]);
+  const { loadJobs, page, setPage, jobs } = useJobs();
 
   return (
     <div>
