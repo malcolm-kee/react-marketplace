@@ -1,5 +1,5 @@
 import { useJobs, CareerItem } from "domains/career";
-import { LoginForm, useAuthState } from "domains/auth";
+import { LoginForm, useAuth } from "domains/auth";
 import * as React from "react";
 
 const createJobApplication = (jobId, token) =>
@@ -23,7 +23,7 @@ const createJobApplication = (jobId, token) =>
 
 export const ApplyJob = () => {
   const { page, setPage, jobs } = useJobs();
-  const auth = useAuthState();
+  const auth = useAuth();
 
   return (
     <div>

@@ -1,29 +1,13 @@
 import { Button } from "components/button";
 import { TextField } from "components/text-field";
 import * as React from "react";
+import { useLogin } from "../auth.state";
 
-const login = (email, password) =>
-  fetch("https://ecomm-service.herokuapp.com/login", {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: email,
-      password,
-    }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    throw new Error(res.statusText);
-  });
-
-export const LoginForm = ({ onSuccess }) => {
+export const LoginForm = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [status, setStatus] = React.useState("idle");
+  const login = useLogin();
 
   return (
     <div className="max-w-md mx-auto m-6 shadow">
@@ -31,9 +15,7 @@ export const LoginForm = ({ onSuccess }) => {
         onSubmit={(ev) => {
           ev.preventDefault();
           setStatus("loading");
-          login(email, password)
-            .then((res) => onSuccess(res.access_token))
-            .catch(() => setStatus("error"));
+          login({ email, password }).catch(() => setStatus("error"));
         }}
         className="p-6"
       >
