@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Badge } from "./badge";
 import { BriefcaseIcon, PencilIcon, TrashIcon } from "@heroicons/react/solid";
+import * as React from "react";
+import { Badge } from "components/badge";
 
 const IconButton = (props) => (
   <button

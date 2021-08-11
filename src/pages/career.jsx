@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CareerItem } from "../components/career-item";
+import { CareerItem } from "domains/career";
 import { TextInput } from "../components/text-input";
 
 const getJobs = (page, signal) => {
