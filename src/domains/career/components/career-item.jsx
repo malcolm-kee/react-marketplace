@@ -1,4 +1,9 @@
-import { BriefcaseIcon, PencilIcon, TrashIcon } from "@heroicons/react/solid";
+import {
+  BriefcaseIcon,
+  PencilIcon,
+  TrashIcon,
+  CursorClickIcon,
+} from "@heroicons/react/solid";
 import * as React from "react";
 import { Badge } from "components/badge";
 
@@ -47,6 +52,7 @@ export function CareerItem({
   studentFriendly,
   onEdit,
   onDelete,
+  onApply,
 }) {
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
@@ -66,8 +72,13 @@ export function CareerItem({
           </div>
         </div>
         <div className="ml-5 flex-shrink-0 inline-flex items-center justify-center gap-2">
-          <EditButton onClick={onEdit} />
-          <DeleteButton onClick={onDelete} />
+          {onApply && (
+            <IconButton onClick={onApply}>
+              <CursorClickIcon className="h-5 w-5 text-gray-400" />
+            </IconButton>
+          )}
+          {onEdit && <EditButton onClick={onEdit} />}
+          {onDelete && <DeleteButton onClick={onDelete} />}
         </div>
       </div>
     </div>

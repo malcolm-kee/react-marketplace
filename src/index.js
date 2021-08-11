@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import "./index.css";
-import { Career } from "./pages/career";
+import { ApplyJob } from "./pages/apply-job";
 
-ReactDOM.render(<Career />, document.querySelector("#root"));
+ReactDOM.render(<ApplyJob />, document.querySelector("#root"));
