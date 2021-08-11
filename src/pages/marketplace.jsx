@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ListingItem } from "../components/listing-item";
+import { ListingItem } from "domains/marketplace";
 import { Select } from "../components/select";
 import { Textarea } from "../components/textarea";
 
