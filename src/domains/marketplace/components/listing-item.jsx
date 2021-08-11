@@ -1,4 +1,8 @@
-import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
+import {
+  PencilIcon,
+  TrashIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/solid";
 import { Button } from "components/button";
 import PropTypes from "prop-types";
 import * as React from "react";
@@ -63,11 +67,19 @@ export const ListingItem = (props) => {
           </p>
         </div>
         <div className="flex flex-col md:flex-row gap-3 py-3">
-          <EditButton />
-          <DeleteButton
-            text={isDeleting ? "DELETING..." : "DELETE"}
-            onClick={() => setIsDeleting(!isDeleting)}
-          />
+          {props.onAddToCart ? (
+            <Button variant="primary" onClick={props.onAddToCart}>
+              <ShoppingCartIcon className="h-4 w-4 mr-1.5" /> ADD TO CART
+            </Button>
+          ) : (
+            <>
+              <EditButton />
+              <DeleteButton
+                text={isDeleting ? "DELETING..." : "DELETE"}
+                onClick={() => setIsDeleting(!isDeleting)}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -1,12 +1,7 @@
 import * as React from "react";
-import { ListingItem } from "domains/marketplace";
+import { ListingItem, useListings } from "domains/marketplace";
 import { Select } from "../components/select";
 import { Textarea } from "../components/textarea";
-
-const getListings = (page, signal) =>
-  fetch(`https://ecomm-service.herokuapp.com/marketplace?page=${page}`, {
-    signal,
-  }).then((res) => res.json());
 
 const createListing = (data) =>
   fetch("https://ecomm-service.herokuapp.com/marketplace", {
@@ -30,19 +25,7 @@ const usePersistedState = (storageKey, defaultValue) => {
 };
 
 export const Marketplace = () => {
-  const [listings, setListings] = React.useState(undefined);
-
-  const [page, setPage] = React.useState(1);
-
-  const loadListings = (pageNum, signal) =>
-    getListings(pageNum, signal).then((data) => setListings(data));
-  React.useEffect(() => {
-    const ab = new AbortController();
-    loadListings(page, ab.signal);
-    return () => {
-      ab.abort();
-    };
-  }, [page]);
+  const { listings, loadListings, page, setPage } = useListings();
 
   const [title, setTitle] = usePersistedState("title", "");
 
