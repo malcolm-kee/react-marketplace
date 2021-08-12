@@ -1,10 +1,10 @@
 import * as React from "react";
 import { ListingItem } from "../components/listing-item";
 
-const getListings = () =>
-  fetch("https://ecomm-service.herokuapp.com/marketplace").then((res) =>
-    res.json()
-  );
+const getListings = (page, signal) =>
+  fetch(`https://ecomm-service.herokuapp.com/marketplace?page=${page}`, {
+    signal,
+  }).then((res) => res.json());
 
 const createListing = (data) =>
   fetch("https://ecomm-service.herokuapp.com/marketplace", {
@@ -29,9 +29,24 @@ const usePersistedState = (storageKey, defaultValue) => {
 
 export const Marketplace = () => {
   const [listings, setListings] = React.useState(undefined);
-  const [isLoading, setIsLoading] = React.useState(false);
 
-  const loadListings = () => getListings().then((data) => setListings(data));
+  const [page, setPage] = React.useState(1);
+
+  const loadListings = (pageNum, signal) =>
+    getListings(pageNum, signal)
+      .then((data) => setListings(data))
+      .catch((err) => {
+        if (err.name !== "AbortError") {
+          throw err;
+        }
+      });
+  React.useEffect(() => {
+    const ab = new AbortController();
+    loadListings(page, ab.signal);
+    return () => {
+      ab.abort();
+    };
+  }, [page]);
 
   const [title, setTitle] = usePersistedState("title", "");
 
@@ -159,6 +174,18 @@ export const Marketplace = () => {
         </div>
       </form>
       <div className="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between">
+          <button
+            type="button"
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
+            Prev
+          </button>
+          <button type="button" onClick={() => setPage(page + 1)}>
+            Next
+          </button>
+        </div>
         <div className="grid md:grid-cols-2 gap-x-4 gap-y-8 xl:grid-cols-3 xl:gap-x-6">
           {listings &&
             listings.map((item) => (
@@ -173,19 +200,6 @@ export const Marketplace = () => {
               />
             ))}
         </div>
-        {!listings && (
-          <div>
-            <button
-              onClick={() => {
-                setIsLoading(true);
-                loadListings();
-              }}
-              type="button"
-            >
-              {isLoading ? "Loading..." : "Load Listing"}
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
